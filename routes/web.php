@@ -27,12 +27,11 @@ Route::group(
         })->name('dashboard.index');
         Route::get('/login','Auth\loginController@login')->name('user.login');
         Route::post('/postLogin','Auth\loginController@postLogin')->name('user.post.login');
-
-
         Route::post('/postLogout','Auth\loginController@postLogout')->name('user.logout');
         Route::get('portfolio','Auth\portfolioController@index')->name('user.portfolio');
         Route::post('portfolio','Auth\portfolioController@portfolioUpdate')->name('user.post.portfolio');
         Route::resource('admin','AdminController')->except(['create','show']);
+        Route::resource('category','CategoryController')->except(['create','show']);
 
     });
 });

@@ -18,7 +18,6 @@ class AdminController extends Controller
 
 
     public function store(Request $request){
-        //dd($request->all());
         $validator = Validator::make($request->all(),$this->validateUpdate());
         if ($validator->fails()){
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();

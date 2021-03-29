@@ -30,11 +30,14 @@
         @endif
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Categories</span>
+                <i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Categories</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
+
             </a>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="bootstrap-components.html"><i class="icon fa fa-circle-o"></i>Main Category</a></li>
+                <li><a class="treeview-item" href="{{route('category.index')}}">
+                        <i class="icon fa fa-stop-circle-o" style="color: #28B463" aria-hidden="true"></i>
+                        Main Category</a></li>
                 <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Sub Category</a></li>
                 <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Brand</a></li>
             </ul>
