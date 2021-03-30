@@ -32,28 +32,31 @@
         <div>
             <h1>
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
-                Admin Page
+                @lang("dashboardLang.Admin_Page")
             </h1>
-            <p>Edit Admins of ecoWaza Website</p>
+            <p>
+                @lang("dashboardLang.Edit_Admins_of_ecoWaza_Website")
+            </p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Admins</a></li>
-            <li class="breadcrumb-item active">Edit</li>
+            <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">@lang("dashboardLang.Dashboard")</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">@lang("dashboardLang.Admins")</a></li>
+            <li class="breadcrumb-item active">@lang("dashboardLang.Edit")</li>
         </ul>
     </div>
     <div class="tile mb-4">
         <div class="row line-head d-flex">
             <div class="col-lg-10">
                 <div class="page-header ">
-                    <p class="mb-3" style="font-size: 20px" id="navs">Edit Users </p>
+                    <p class="mb-3" style="font-size: 20px" id="navs">@lang("dashboardLang.Edit_Users")</p>
                 </div>
             </div>
             <div class="col-lg-2">
                 <a class="btn btn-info ml-auto btn-sm" id="navs" href="{{route('admin.index')}}">
                     <i class="fa fa-home" aria-hidden="true"></i>
-                    Show Admins</a>
+                    @lang("dashboardLang.Show_Admins")
+                </a>
             </div>
             </div>
 
@@ -62,42 +65,41 @@
             {{method_field('PATCH')}}
             <div class="row">
                 <div class="col-md-6">
-                    <label>First Name</label>
+                    <label>@lang("dashboardLang.First_Name")</label>
                     <input class="form-control" type="text" name="first_name" value="{{$firstname}}">
                 </div>
                 <div class="col-md-6">
-                    <label>Last Name</label>
+                    <label>@lang("dashboardLang.Last_Name")</label>
                     <input class="form-control" type="text" name="last_name" value="{{$lastname}}" >
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-4">
-                    <label>Email</label>
+                    <label>@lang("dashboardLang.Email")</label>
                     <input class="form-control" type="email" name="email" value="{{$admin->email}}">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mb-4">
-                    <label>Photo</label>
+                    <label>@lang("dashboardLang.Photo") </label>
                     <input class="form-control" type="file" name="image">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mb-4">
-                    <label>Password</label>
+                    <label>@lang("dashboardLang.Password") </label>
                     <input class="form-control" type="password" name="password">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mb-4">
-                    <label>Confirm Password</label>
+                    <label>@lang("dashboardLang.Confirm_Password") </label>
                     <input class="form-control" type="password" name="password_confirmation">
                 </div>
             </div>
             <div class="col-lg-12">
-                <label>Permissions</label>
-
+                <label>@lang("dashboardLang.Permissions") </label>
                 <div class="bs-component">
                     <ul class="nav nav-tabs">
                         @foreach($models as $index=>$model)
-                            <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">{{$model}}</a></li>
+                            <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
                         @endforeach
                     </ul>
                     <div class="tab-content mt-3 ml-2" id="myTabContent">
@@ -106,7 +108,7 @@
                                 @foreach($operatios as $index=>$ope)
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" name="permission[]" {{$admin->hasPermission($model.'_'.$ope)? 'checked' : '' }}  value="{{$model}}_{{$ope}}"><span class="label-text">{{$ope}}</span>
+                                            <input type="checkbox" name="permission[]" {{$admin->hasPermission($model.'_'.$ope)? 'checked' : '' }}  value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
                                         </label>
                                     </div>
                                 @endforeach
@@ -116,7 +118,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>@lang("dashboardLang.Save")</button>
             </div>
         </form>
 

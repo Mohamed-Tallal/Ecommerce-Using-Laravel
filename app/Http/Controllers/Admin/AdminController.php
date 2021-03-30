@@ -29,7 +29,7 @@ class AdminController extends Controller
         ]);
         $admin->attachRole('admins');
         $admin->syncPermissions($request->permission);
-        return redirect()->route('admin.index')->with('toast_success' ,'Successfully Added '. $admin->name);
+        return redirect()->route('admin.index')->with('toast_success' ,__('dashboardLang.Successfully Added'). $admin->name_.app()->getLocal());
     }
 
 
@@ -54,7 +54,7 @@ class AdminController extends Controller
         $admin->email = $request->email;
         $admin->syncPermissions($request->permission);
         $admin->update();
-        return redirect()->route('admin.index')->with('toast_success' ,'Successfully Updated '. $admin->name);
+        return redirect()->route('admin.index')->with('toast_success' ,__('dashboardLang.Successfully Updated'). $admin->name_.app()->getLocal());
 
     }
 
@@ -62,7 +62,8 @@ class AdminController extends Controller
     public function destroy($id){
        $admin =  User::find($id);
         $admin->delete();
-        return redirect()->route('admin.index')->with('toast_success' ,'Successfully deleted '. $admin->name);
+        return redirect()->route('admin.index')
+            ->with('toast_success' ,__('dashboardLang.Successfully deleted'). $admin->name_.app()->getLocal());
 
     }
 

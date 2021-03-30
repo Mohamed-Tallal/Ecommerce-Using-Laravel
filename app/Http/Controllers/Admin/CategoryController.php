@@ -25,7 +25,7 @@ class CategoryController extends Controller
               'name_en' => $request->name_en,
               'name_de' => $request->name_de,
            ]);
-           return redirect()->route('category.index')->withToastSuccess('Successfully added '.$request->name_.app()->getLocale(). ' in Categories');
+           return redirect()->route('category.index')->withToastSuccess(__('dashboardLang.Successfully Added').$request->name_.app()->getLocale(). ' in Categories');
         }
     }
 
@@ -41,19 +41,17 @@ class CategoryController extends Controller
 
         $category = Category::find($id);
         $category->update();
-        return redirect()->route('category.index')->with('toast_success' ,'Category Updated Successfully');
+        return redirect()->route('category.index')->with('toast_success' ,__('dashboardLang.Successfully Updated').$category->name_.app()->getLocal());
 
     }
 
 
     public function destroy($id){
         Category::find($id)->delete();
-        return back()->withToastSuccess('Category deleted Successfully!');
+        return back()->withToastSuccess(
+            __('dashboardLang.Successfully deleted'))
+            ;
     }
-
-
-
-
 
     protected function categoryValidate(){
         return [

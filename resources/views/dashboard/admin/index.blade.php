@@ -32,14 +32,18 @@
         <div>
             <h1>
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
-                Admin Page
+                @lang('dashboardLang.Admin_Page')
             </h1>
-            <p>Admins of ecoWaza Website</p>
+            <p>@lang('dashboardLang.Admins_of_ecoWaza_Website')</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-            <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Admins</li>
+            <li class="breadcrumb-item">
+                <a href="{{route('dashboard.index')}}">
+                    @lang('dashboardLang.Dashboard')
+                </a>
+            </li>
+            <li class="breadcrumb-item active">@lang('dashboardLang.Admins')</li>
         </ul>
     </div>
     <div class="row d-flex mb-4" >
@@ -48,7 +52,7 @@
                     <input class="form-control w-75" id="exampleInputPassword1" type="password" placeholder="Search">
                     <button class="btn btn-info ml-3" type="submit">
                         <i class="fa fa-search" aria-hidden="true"></i>
-                        Search
+                        @lang('dashboardLang.Search')
                     </button>
             </form>
         </div>
@@ -57,12 +61,12 @@
         @if(auth()->user()->hasPermission('users_create'))
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#staticBackdrop">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    Add New Admin
+                    @lang('dashboardLang.Add_New_Admin')
                 </button>
         @else
             <button type="button" disabled class="btn btn-info">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
-                Add New Admin
+                @lang('dashboardLang.Add_New_Admin')
             </button>
         @endif
         </div>
@@ -87,10 +91,10 @@
                                         <thead>
                                         <tr role="row">
                                             <th style="width: 150px;">#</th>
-                                            <th style="width: 253px;">Name</th>
-                                            <th style="width: 109px;">Email</th>
-                                            <th style="width: 54px;">Permission</th>
-                                            <th style="width: 108px;">Control</th>
+                                            <th style="width: 253px;">@lang('dashboardLang.Name')</th>
+                                            <th style="width: 109px;">@lang('dashboardLang.Email')</th>
+                                            <th style="width: 54px;">@lang('dashboardLang.Permission')</th>
+                                            <th style="width: 108px;"> @lang('dashboardLang.Control') </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -112,11 +116,14 @@
                                                     @if(auth()->user()->hasPermission('users_update'))
 
                                                         <a class="btn btn-primary mr-2 d-flex" href="{{route('admin.edit',$user->id)}}" style="color: #fff" type="button">
-                                                            <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update
+                                                            <i class="fa fa-pencil iStyle" aria-hidden="true"></i>
+                                                            @lang('dashboardLang.Update')
                                                         </a>
                                                     @else
                                                         <button disabled class="btn btn-primary mr-2 d-flex" style="color: #fff" type="button">
-                                                            <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update</button>
+                                                            <i class="fa fa-pencil iStyle" aria-hidden="true"></i>
+                                                            @lang('dashboardLang.Update')
+                                                        </button>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('users_delete'))
                                                         <form method="post" action="{{route('admin.destroy',$user->id)}}">
@@ -124,13 +131,13 @@
                                                             {{method_field('delete')}}
                                                             <button class="btn btn-danger d-flex" type="submit">
                                                             <i class="fa fa-user-times iStyle" aria-hidden="true"></i>
-                                                            Delete
+                                                                @lang('dashboardLang.Delete')
                                                         </button>
                                                         </form>
                                                     @else
                                                         <button disabled class="btn btn-danger d-flex" type="button">
                                                             <i class="fa fa-user-times iStyle" aria-hidden="true"></i>
-                                                            Delete
+                                                            @lang('dashboardLang.Delete')
                                                         </button>
                                                     @endif
                                                 </td>
@@ -143,7 +150,8 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5" >
-                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$users->count()}} of {{$userCount}}  entries</div>
+                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">
+                                        @lang('dashboardLang.Showing_1_to'){{$users->count()}} @lang('dashboardLang.of')  {{$userCount}} @lang('dashboardLang.entries') </div>
                                 </div>
                                 <div class="col-sm-12 col-md-7" >
                                     {{$users->links('paginate')}}
@@ -156,7 +164,7 @@
             </div>
         </div>
         @else
-            <p> Not Yield Record Yet</p>
+            <p>@lang('dashboardLang.Not_Yield_Record_Yet') </p>
         @endif
 
     </div>
@@ -166,7 +174,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add New Admin</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">@lang('dashboardLang.Add_New_Admin')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -176,42 +184,42 @@
                         @csrf
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>First Name</label>
+                                    <label>@lang('dashboardLang.First_Name')</label>
                                     <input class="form-control" type="text" name="first_name" >
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Last Name</label>
+                                    <label>@lang('dashboardLang.Last_Name')</label>
                                     <input class="form-control" type="text" name="last_name" >
                                 </div>
                             </div>
                         <div class="row">
                             <div class="col-md-12 mb-4">
-                                <label>Email</label>
+                                <label>@lang('dashboardLang.Email')</label>
                                 <input class="form-control" type="email" name="email">
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-md-12 mb-4">
-                                <label>Photo</label>
+                                <label>@lang('dashboardLang.Photo') Photo</label>
                                 <input class="form-control" type="file" name="image">
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-md-12 mb-4">
-                                <label>Password</label>
+                                <label>@lang('dashboardLang.Password')</label>
                                 <input class="form-control" type="password" name="password">
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-md-12 mb-4">
-                                <label>Confirm Password</label>
+                                <label>@lang('dashboardLang.Confirm_Password')</label>
                                 <input class="form-control" type="password" name="password_confirmation">
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <label>Permissions</label>
+                            <label>@lang('dashboardLang.Permissions')</label>
 
                             <div class="bs-component">
                                 <ul class="nav nav-tabs">
                                     @foreach($models as $index=>$model)
-                                    <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">{{ucfirst($model)}}</a></li>
+                                    <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
                                     @endforeach
                                 </ul>
                                 <div class="tab-content mt-3 ml-2" id="myTabContent">
@@ -220,7 +228,7 @@
                                         @foreach($operatios as $index=>$ope)
                                             <div class="animated-checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="permission[]" value="{{$model}}_{{$ope}}"><span class="label-text">{{ucfirst($ope)}}</span>
+                                                    <input type="checkbox" name="permission[]" value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
                                                 </label>
                                             </div>
                                         @endforeach
@@ -231,8 +239,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang("dashboardLang.Close")</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>@lang("dashboardLang.Save")</button>
                         </div>
                     </form>
                 </div>

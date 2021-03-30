@@ -21,12 +21,12 @@ class portfolioController extends Controller
         $user = User::find(auth()->guard('web')->user()->id);
         $user->name = $request->first_name.' '.$request->last_name;
         $user->email = $request->email;
-        $user->image = $request->image;
+        //$user->image = $request->image;
         if ($request->password !=null){
             $user->password = $request->password;
         }
         $user->update();
-        return redirect()->route('user.portfolio')->with('toast_success' ,'You Update Profile Success');
+        return redirect()->route('user.portfolio')->with('toast_success' , __('dashboardLang.You Update Profile Success'));
     }
 
 }

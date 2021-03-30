@@ -1,3 +1,7 @@
+@php
+    $models = ['users','categories','products'];
+    $operatios = ['read','create','update','delete'];
+@endphp
 @extends('dashboard.layouts.app')
 @section('content')
         <div class="row user">
@@ -5,7 +9,14 @@
                 <div class="profile">
                     <div class="info"><img class="user-img" src="{{asset('uploads/admins/').'/'.auth()->guard('web')->user()->image}}">
                         <h4>{{auth()->guard('web')->user()->name}}</h4>
-                        <p>FrontEnd Developer</p>
+                        <p style="font-size: large">
+                            @php
+                                $name = explode("_", implode(', ', auth()->guard('web')->user()->roles->pluck('name')->toArray()));
+                                $lastname = ucfirst(array_pop($name));
+                                $firstname = ucfirst(implode("_", $name));
+                                echo $firstname.' '.$lastname;
+                            @endphp
+                        </p>
                     </div>
                     <div class="cover-image"></div>
                 </div>
@@ -14,7 +25,7 @@
                 <div class="tile p-0">
                     <ul class="nav flex-column nav-tabs user-tabs">
                         <li class="nav-item"><a class="nav-link active" href="#user-timeline" data-toggle="tab">Timeline</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#user-settings" data-toggle="tab">Settings</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#user-settings" data-toggle="tab">@lang("dashboardLang.Settings")</a></li>
                     </ul>
                 </div>
             </div>
@@ -56,83 +67,60 @@
                     </div>
                     <div class="tab-pane fade" id="user-settings">
                         <div class="tile user-settings">
-                            <h4 class="line-head">Settings</h4>
+                            <h4 class="line-head">@lang("dashboardLang.Settings")</h4>
                             <form method="post" action="{{route('user.post.portfolio')}}">
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="col-md-5">
-                                        <label>First Name</label>
+                                        <label>@lang("dashboardLang.First_Name")</label>
                                         <input class="form-control" type="text" name="first_name" value="{{$first ?? ''}}">
                                     </div>
                                     <div class="col-md-5">
-                                        <label>Last Name</label>
+                                        <label>@lang("dashboardLang.Last_Name")</label>
                                         <input class="form-control" type="text" name="last_name" value="{{$last}}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 mb-4">
-                                        <label>Email</label>
+                                        <label>@lang("dashboardLang.Email")</label>
                                         <input class="form-control" type="email" name="email" value="{{$user->email}}">
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-10 mb-4">
-                                        <label>Photo</label>
+                                        <label>@lang("dashboardLang.Photo")</label>
                                         <input class="form-control" type="file" name="image">
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-10 mb-4">
-                                        <label>Password</label>
+                                        <label>@lang("dashboardLang.Password")</label>
                                         <input class="form-control" type="password" name="password">
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-md-10 mb-4">
-                                        <label>Confirm Password</label>
+                                        <label>@lang("dashboardLang.Confirm_Password")</label>
                                         <input class="form-control" type="password" name="password_confirmation">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label>Permissions</label>
-
+                                    <label>@lang("dashboardLang.Permissions")</label>
                                     <div class="bs-component">
                                         <ul class="nav nav-tabs">
-                                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile">Profile</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cd">D</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cd2">h</a></li>
-
+                                            @foreach($models as $index=>$model)
+                                                <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
+                                            @endforeach
                                         </ul>
-                                        <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade active show" id="home">
-                                                <div class="animated-checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="permission[]"><span class="label-text">Show</span>
-                                                    </label>
+                                        <div class="tab-content mt-3 ml-2" id="myTabContent">
+                                            @foreach($models as $index=>$model)
+                                                <div class="tab-pane fade {{$index == 0? 'active show' : ''}} " id="{{$model.'_'.$index}}">
+                                                    @foreach($operatios as $index=>$ope)
+                                                        <div class="animated-checkbox">
+                                                            <label>
+                                                                <input type="checkbox" name="permission[]" {{$user->hasPermission($model.'_'.$ope)? 'checked' : '' }} value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                                <div class="animated-checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="permission[]"><span class="label-text">Create</span>
-                                                    </label>
-                                                </div>
-                                                <div class="animated-checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="permission[]"><span class="label-text">Update</span>
-                                                    </label>
-                                                </div>
-                                                <div class="animated-checkbox">
-                                                    <label>
-                                                        <input type="checkbox" name="permission[]"><span class="label-text">Delete</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="profile">
-                                                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
-                                            </div>
-                                            <div class="tab-pane fade" id="cd">
-                                                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
-                                            </div>
-                                            <div class="tab-pane fade" id="cd2">
-                                                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -151,3 +139,30 @@
 
 
 @endsection
+<!-----
+
+
+                                    <div class="bs-component">
+                                        <ul class="nav nav-tabs">
+                                            @foreach($models as $index=>$model)
+    <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
+                                            @endforeach
+    </ul>
+    <div class="tab-content mt-3 ml-2" id="myTabContent">
+@foreach($models as $index=>$model)
+    <div class="tab-pane fade {{$index == 0? 'active show' : ''}} " id="{{$model.'_'.$index}}">
+                                                    @foreach($operatios as $index=>$ope)
+        <div class="animated-checkbox">
+            <label>
+                <input type="checkbox" disabled name="permission[]" {{$user->hasPermission($model.'_'.$ope)? 'checked' : '' }}  value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+        </div>
+@endforeach
+    </div>
+</div>
+
+
+
+---------->
