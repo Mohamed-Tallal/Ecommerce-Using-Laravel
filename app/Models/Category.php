@@ -8,4 +8,10 @@ class Category extends Model
 {
     protected $fillable = ['id' ,'name_en','name_de'];
 
+
+
+
+    public function subCategory(){
+        return $this->hasMany('App\Models\SubCategory','category_id','id');
+    }
 }

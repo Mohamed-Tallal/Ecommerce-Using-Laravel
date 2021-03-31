@@ -15,7 +15,10 @@ class CategoryController extends Controller
         $categoryCount =DB::table('categories')->select('id','name_'.app()->getLocale().' as name')->get();
         return view('dashboard.category.index',compact('categories','categoryCount'));
     }
-
+    public function create(){
+        $category = Category::paginate(1);
+        return response()->json($category);
+    }
     public function store(Request $request){
         $validator = Validator::make($request->all(),$this->categoryValidate());
         if ($validator->fails()){
@@ -38,11 +41,9 @@ class CategoryController extends Controller
         if ($validator->fails()){
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-
         $category = Category::find($id);
         $category->update();
         return redirect()->route('category.index')->with('toast_success' ,__('dashboardLang.Successfully Updated').$category->name_.app()->getLocal());
-
     }
 
 

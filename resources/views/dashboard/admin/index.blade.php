@@ -1,17 +1,3 @@
-
-<!--
-                                                        <i class="fa fa-trash-o"></i>
-<i class="fa fa-user-plus" aria-hidden="true"></i>
-<i class="fa fa-users" aria-hidden="true"></i>
-
-<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-
-
-
-
-    --->
-
-
 @extends('dashboard.layouts.app')
 @section('style')
 <style>
