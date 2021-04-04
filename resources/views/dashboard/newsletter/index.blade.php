@@ -20,7 +20,7 @@
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Category</li>
+            <li class="breadcrumb-item active">Subscription</li>
         </ul>
     </div>
     <div class="row d-flex mb-4" >
@@ -52,11 +52,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <p class="mb-3 line-head" style="font-size: 20px" id="navs">All Categories </p>
+                    <p class="mb-3 line-head" style="font-size: 20px" id="navs">All Subscriptions </p>
                 </div>
             </div>
         </div>
-        @if($categories->count() >0)
+        @if($newsLetters->count() >0)
         <div class="row">
             <div class="col-md-12">
                 <div class="tile-body">
@@ -73,14 +73,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($categories as $index=>$category)
+                                        @foreach($newsLetters as $index=>$newsLetter)
                                             <tr role="row" class="odd">
                                                 <td>{{++$index}}</td>
-                                                <td>{{$category->name}}</td>
+                                                <td>{{$newsLetter->email}}</td>
                                                 <td class="d-flex">
                                                     @if(auth()->user()->hasPermission('categories_update'))
 
-                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('category.edit',$category->id)}}" style="color: #fff" type="button">
+                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('category.edit',$newsLetter->id)}}" style="color: #fff" type="button">
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update
                                                         </a>
                                                     @else
@@ -88,7 +88,7 @@
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update</button>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('categories_delete'))
-                                                        <form method="post" action="{{route('category.destroy',$category->id)}}">
+                                                        <form method="post" action="{{route('category.destroy',$newsLetter->id)}}">
                                                         @csrf
                                                             {{method_field('delete')}}
                                                             <button class="btn btn-danger d-flex" type="submit">
@@ -112,10 +112,10 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$categories->count()}} of {{$categoryCount->count()}}  entries</div>
+                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$newsLetters->count()}} of {{$newsLetterCount->count()}}  entries</div>
                                 </div>
                                 <div class="col-sm-12 col-md-7" >
-                                    {{$categories->links('paginate')}}
+                                    {{$newsLetters->links('paginate')}}
                                 </div>
                             </div>
 
@@ -125,7 +125,7 @@
             </div>
         </div>
         @else
-            <p> Not Yield Record Yet</p>
+            <h4 style="text-align: center;"> Not Yield Record Yet</h4>
         @endif
 
     </div>

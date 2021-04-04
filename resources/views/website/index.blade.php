@@ -271,86 +271,8 @@
 <div class="cart-overlay"></div>
 
 <!-- Hero Section Start -->
-<div class="hero-section section mb-30">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-
-                <!-- Hero Slider Start -->
-                <div class="hero-slider hero-slider-one">
-
-                    <!-- Hero Item Start -->
-                    <div class="hero-item">
-                        <div class="row align-items-center justify-content-between">
-
-                            <!-- Hero Content -->
-                            <div class="hero-content col">
-
-                                <h2>HURRY UP!</h2>
-                                <h1><span>uPhone X</span></h1>
-                                <h1>IT’S <span class="big">29%</span> OFF</h1>
-                                <a href="#">get it now</a>
-
-                            </div>
-
-                            <!-- Hero Image -->
-                            <div class="hero-image col">
-                                <img src="{{asset('wesite/assets/images/hero/hero-1.png')}}" alt="Hero Image">
-                            </div>
-
-                        </div>
-                    </div><!-- Hero Item End -->
-
-                    <!-- Hero Item Start -->
-                    <div class="hero-item">
-                        <div class="row align-items-center justify-content-between">
-
-                            <!-- Hero Content -->
-                            <div class="hero-content col">
-
-                                <h2>HURRY UP!</h2>
-                                <h1><span>GL G6</span></h1>
-                                <h1>IT’S <span class="big">35%</span> OFF</h1>
-                                <a href="#">get it now</a>
-
-                            </div>
-
-                            <!-- Hero Image -->
-                            <div class="hero-image col">
-                                <img src="{{asset('wesite/assets/images/hero/hero-2.png')}}" alt="Hero Image">
-                            </div>
-
-                        </div>
-                    </div><!-- Hero Item End -->
-
-                    <!-- Hero Item Start -->
-                    <div class="hero-item">
-                        <div class="row align-items-center justify-content-between">
-
-                            <!-- Hero Content -->
-                            <div class="hero-content col">
-
-                                <h2>HURRY UP!</h2>
-                                <h1><span>MSVII Case</span></h1>
-                                <h1>IT’S <span class="big">15%</span> OFF</h1>
-                                <a href="#">get it now</a>
-
-                            </div>
-
-                            <!-- Hero Image -->
-                            <div class="hero-image col">
-                                <img src="{{asset('wesite/assets/images/hero/hero-3.png')}}" alt="Hero Image">
-                            </div>
-
-                        </div>
-                    </div><!-- Hero Item End -->
-
-                </div><!-- Hero Slider End -->
-
-            </div>
-        </div>
-    </div>
-</div><!-- Hero Section End -->
+@include('website.includes.slider')
+<!-- Hero Section End -->
 
 <!-- Banner Section Start -->
 <div class="banner-section section mb-60">
@@ -430,7 +352,6 @@
 
                                             <a href="#" class="add-to-cart"><i class="ti-shopping-cart"></i>
                                                 <span>ADD TO CART</span></a>
-
                                         </div>
 
                                         <!-- Content -->
@@ -2435,39 +2356,6 @@
     </div>
 </div><!-- Brands Section End -->
 
-<!-- Subscribe Section Start -->
-<div class="subscribe-section section bg-gray pt-55 pb-55">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <!-- Mailchimp Subscribe Content Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-                <div class="subscribe-content">
-                    <h2>SUBSCRIBE <span>OUR NEWSLETTER</span></h2>
-                    <h2><span>TO GET LATEST</span> PRODUCT UPDATE</h2>
-                </div>
-            </div><!-- Mailchimp Subscribe Content End -->
-
-
-            <!-- Mailchimp Subscribe Form Start -->
-            <div class="col-lg-6 col-12 mb-15 mt-15">
-
-                <form class="subscribe-form" action="#">
-                    <input type="email" autocomplete="off" placeholder="Enter your email here" />
-                    <button >subscribe</button>
-                </form>
-                <!-- mailchimp-alerts Start -->
-                <div class="mailchimp-alerts text-centre">
-                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                </div><!-- mailchimp-alerts end -->
-
-            </div><!-- Mailchimp Subscribe Form End -->
-
-        </div>
-    </div>
-</div><!-- Subscribe Section End -->
 
 <!-- Footer Section Start -->
 <div class="footer-section section bg-ivory">
@@ -2594,43 +2482,16 @@
 
 </div><!-- Footer Section End -->
 
-<!-- Popup Subscribe Section Start -->
-<div class="popup-subscribe-section section bg-gray pt-55 pb-55" data-modal="popup-modal">
+<!-- Popup Subscribe
 
-    <!-- Popup Subscribe Wrap Start -->
-    <div class="popup-subscribe-wrap">
 
-        <button class="close-popup">X</button>
 
-        <!-- Popup Subscribe Banner -->
-        <div class="popup-subscribe-banner banner">
-            <a href="#"><img src="{{asset('wesite/assets/images/banner/banner-7.jpg')}}" alt="Banner"></a>
-        </div>
 
-        <!-- Popup Subscribe Form Wrap Start -->
-        <div class="popup-subscribe-form-wrap">
 
-            <h1>SUBSCRIBE <br>OUR NEWSLETTER</h1>
-            <h4>Get latest product update...</h4>
+Section Start -->
 
-            <!-- Newsletter Form -->
-            <form action="#" method="post" class="popup-subscribe-form validate" target="_blank" novalidate>
-                <div id="mc_embed_signup_scroll">
-                    <label for="popup_subscribe" class="d-none">Subscribe to our mailing list</label>
-                    <input type="email" value="" name="EMAIL" class="email" id="popup_subscribe" placeholder="Enter your email here" required>
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                    <button type="submit" name="subscribe" id="" class="button">subscribe</button>
-                </div>
-            </form>
 
-            <p>Be the first in the by getting special deals and offers send directly to your inbox.</p>
-
-        </div><!-- Popup Subscribe Form Wrap End -->
-
-    </div><!-- Popup Subscribe Wrap End -->
-
-</div><!-- Popup Subscribe Section End -->
+<!-- Popup Subscribe Section End -->
 
 
 <!-- JS

@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        @if($users->count() >0)
+        @if($coupons->count() >0)
         <div class="row">
             <div class="col-md-12">
                 <div class="tile-body">
@@ -78,30 +78,19 @@
                                         <tr role="row">
                                             <th style="width: 150px;">#</th>
                                             <th style="width: 253px;">@lang('dashboardLang.Name')</th>
-                                            <th style="width: 109px;">@lang('dashboardLang.Email')</th>
-                                            <th style="width: 54px;">@lang('dashboardLang.Permission')</th>
+                                            <th style="width: 109px;">@lang('dashboardLang.percentage')</th>
                                             <th style="width: 108px;"> @lang('dashboardLang.Control') </th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $index=>$user)
+                                        @foreach($coupons as $index=>$coupon)
                                             <tr role="row" class="odd">
                                                 <td>{{++$index}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->email}}</td>
-                                                <td style="text-align: center">
-                                                    <span class="badge badge-success">
-                                                        {{
-                                                    $firstname = ucfirst(implode("_", explode("_", implode(', ',
-                                                    $user->roles->pluck('name')->toArray()))))
-
-                                                    }}
-                                                    </span>
-                                                </td>
+                                                <td>{{$coupon->name}}</td>
+                                                <td>{{$coupon->percentage}}</td>
                                                 <td class="d-flex">
                                                     @if(auth()->user()->hasPermission('users_update'))
-
-                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('admin.edit',$user->id)}}" style="color: #fff" type="button">
+                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('admin.edit',$coupon->id)}}" style="color: #fff" type="button">
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>
                                                             @lang('dashboardLang.Update')
                                                         </a>
@@ -112,7 +101,7 @@
                                                         </button>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('users_delete'))
-                                                        <form method="post" action="{{route('admin.destroy',$user->id)}}">
+                                                        <form method="post" action="{{route('admin.destroy',$coupon->id)}}">
                                                         @csrf
                                                             {{method_field('delete')}}
                                                             <button class="btn btn-danger d-flex" type="submit">
@@ -137,10 +126,10 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-5" >
                                     <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">
-                                        @lang('dashboardLang.Showing_1_to'){{$users->count()}} @lang('dashboardLang.of')  {{$userCount}} @lang('dashboardLang.entries') </div>
+                                        @lang('dashboardLang.Showing_1_to'){{$coupons->count()}} @lang('dashboardLang.of') {{$couponsCount->count()}} @lang('dashboardLang.entries') </div>
                                 </div>
                                 <div class="col-sm-12 col-md-7" >
-                                    {{$users->links('paginate')}}
+                                    {{$coupons->links('paginate')}}
                                 </div>
                             </div>
 

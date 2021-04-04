@@ -125,7 +125,7 @@
             </div>
         </div>
         @else
-            <p> Not Yield Record Yet</p>
+            <h4 style="text-align: center;"> Not Yield Record Yet</h4>
         @endif
 
     </div>

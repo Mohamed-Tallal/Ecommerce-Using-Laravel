@@ -13,14 +13,14 @@
         <div>
             <h1>
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
-                Categories Page
+                Sub Categories Page
             </h1>
-            <p>Main Categories of ecoWaza Website</p>
+            <p>Sub Categories of ecoWaza Website</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Category</li>
+            <li class="breadcrumb-item active">Sub Category</li>
         </ul>
     </div>
     <div class="row d-flex mb-4" >
@@ -38,12 +38,12 @@
         @if(auth()->user()->hasPermission('categories_create'))
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#staticBackdrop">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    Add New Category
+                    Add New Sub Category
                 </button>
         @else
             <button type="button" disabled class="btn btn-info">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
-                Add New Category
+                Add New Sub Category
             </button>
         @endif
         </div>
@@ -52,11 +52,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <p class="mb-3 line-head" style="font-size: 20px" id="navs">All Categories </p>
+                    <p class="mb-3 line-head" style="font-size: 20px" id="navs">All Sub Categories </p>
                 </div>
             </div>
         </div>
-        @if($categories->count() >0)
+        @if($subCategories->count() >0)
         <div class="row">
             <div class="col-md-12">
                 <div class="tile-body">
@@ -69,18 +69,20 @@
                                         <tr role="row">
                                             <th style="width: 150px;">#</th>
                                             <th style="width: 253px;">Name</th>
+                                            <th style="width: 253px;">Category Name</th>
                                             <th style="width: 108px;">Control</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($categories as $index=>$category)
+                                        @foreach($subCategories as $index=>$subcategory)
                                             <tr role="row" class="odd">
                                                 <td>{{++$index}}</td>
-                                                <td>{{$category->name}}</td>
+                                                <td>{{$subcategory->name}}</td>
+                                                <td>{{$subcategory->category->name.'_'.app()->getLocale()}}</td>
                                                 <td class="d-flex">
                                                     @if(auth()->user()->hasPermission('categories_update'))
 
-                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('category.edit',$category->id)}}" style="color: #fff" type="button">
+                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('category.edit',$subcategory->id)}}" style="color: #fff" type="button">
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update
                                                         </a>
                                                     @else
@@ -88,7 +90,7 @@
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update</button>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('categories_delete'))
-                                                        <form method="post" action="{{route('category.destroy',$category->id)}}">
+                                                        <form method="post" action="{{route('category.destroy',$subcategory->id)}}">
                                                         @csrf
                                                             {{method_field('delete')}}
                                                             <button class="btn btn-danger d-flex" type="submit">
@@ -112,10 +114,10 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$categories->count()}} of {{$categoryCount->count()}}  entries</div>
+                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$subCategories->count()}} of {{$subcategoryCount->count()}}  entries</div>
                                 </div>
                                 <div class="col-sm-12 col-md-7" >
-                                    {{$categories->links('paginate')}}
+                                    {{$subCategories->links('paginate')}}
                                 </div>
                             </div>
 
@@ -125,7 +127,7 @@
             </div>
         </div>
         @else
-            <p> Not Yield Record Yet</p>
+            <h4 style="text-align: center;"> Not Yield Record Yet</h4>
         @endif
 
     </div>
@@ -135,7 +137,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add New Category</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Add New Sub Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

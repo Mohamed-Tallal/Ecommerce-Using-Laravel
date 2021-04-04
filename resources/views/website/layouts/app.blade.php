@@ -79,21 +79,8 @@
 <div class="cart-overlay"></div>
 
 <!-- Hero Section Start -->
-<div class="hero-section section mb-30">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-
-                <!-- Hero Slider Start -->
-                <div class="hero-slider carousel slide z-depth-1-half hero-slider-one">
 
                     @include('website.includes.slider')
-                </div><!-- Hero Slider End -->
-
-            </div>
-        </div>
-    </div>
-</div><!-- Hero Section End -->
 
 <!-- Banner Section Start -->
 
@@ -2430,7 +2417,7 @@
             <!-- Mailchimp Subscribe Content Start -->
             <div class="col-lg-6 col-12 mb-15 mt-15">
                 <div class="subscribe-content">
-                    <h2>SUBSCRIBE <span>OUR NEWSLETTER</span></h2>
+                    <h2>SUBSCRIBE <span>OUR NEWSLETTER Update</span></h2>
                     <h2><span>TO GET LATEST</span> PRODUCT UPDATE</h2>
                 </div>
             </div><!-- Mailchimp Subscribe Content End -->
@@ -2439,9 +2426,10 @@
             <!-- Mailchimp Subscribe Form Start -->
             <div class="col-lg-6 col-12 mb-15 mt-15">
 
-                <form class="subscribe-form" action="#">
-                    <input type="email" autocomplete="off" placeholder="Enter your email here" />
-                    <button >subscribe</button>
+                <form class="subscribe-form" method="post" action="{{route('subscription.store')}}">
+                    @csrf
+                    <input type="email" name="email" autocomplete="off" placeholder="Enter your email here" />
+                    <button type="submit">subscribe</button>
                 </form>
                 <!-- mailchimp-alerts Start -->
                 <div class="mailchimp-alerts text-centre">
@@ -2591,7 +2579,7 @@
 
         <!-- Popup Subscribe Banner -->
         <div class="popup-subscribe-banner banner">
-            <a href="#"><img src="{{asset('wesite/assets/images/banner/banner-7.jpg')}}" alt="Banner"></a>
+            <a href="#"><img src="{{asset('uploads/subscriptions/].png')}}" alt="Banner"></a>
         </div>
 
         <!-- Popup Subscribe Form Wrap Start -->
@@ -2601,13 +2589,16 @@
             <h4>Get latest product update...</h4>
 
             <!-- Newsletter Form -->
-            <form action="#" method="post" class="popup-subscribe-form validate" target="_blank" novalidate>
+            <form method="post" action="{{route('subscription.store')}}" class="popup-subscribe-form validate" >
+                @csrf
                 <div id="mc_embed_signup_scroll">
                     <label for="popup_subscribe" class="d-none">Subscribe to our mailing list</label>
-                    <input type="email" value="" name="EMAIL" class="email" id="popup_subscribe" placeholder="Enter your email here" required>
+                    <input type="email" value="" name="email" class="email" id="popup_subscribe" placeholder="Enter your email here" required>
                     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value=""></div>
-                    <button type="submit" name="subscribe" id="" class="button">subscribe</button>
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                        <input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value="">
+                    </div>
+                    <button type="submit" class="button">subscribe</button>
                 </div>
             </form>
 

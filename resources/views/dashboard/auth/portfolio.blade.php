@@ -101,29 +101,6 @@
                                         <input class="form-control" type="password" name="password_confirmation">
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
-                                    <label>@lang("dashboardLang.Permissions")</label>
-                                    <div class="bs-component">
-                                        <ul class="nav nav-tabs">
-                                            @foreach($models as $index=>$model)
-                                                <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
-                                            @endforeach
-                                        </ul>
-                                        <div class="tab-content mt-3 ml-2" id="myTabContent">
-                                            @foreach($models as $index=>$model)
-                                                <div class="tab-pane fade {{$index == 0? 'active show' : ''}} " id="{{$model.'_'.$index}}">
-                                                    @foreach($operatios as $index=>$ope)
-                                                        <div class="animated-checkbox">
-                                                            <label>
-                                                                <input type="checkbox" name="permission[]" {{$user->hasPermission($model.'_'.$ope)? 'checked' : '' }} value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row mb-10 mt-5">
                                     <div class="col-md-12">
                                         <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i> Update</button>

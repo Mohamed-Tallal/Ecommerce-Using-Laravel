@@ -3,29 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\NewsLetter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class NewsLetterController extends Controller
+class CouponController extends Controller
 {
-
     public function index(){
-        $newsLetters = DB::table('news_letters')->select('id','email')->orderBy('id','desc')->paginate('5');
-        $newsLetterCount =DB::table('news_letters')->select('id')->get();
-        return view('dashboard.newsletter.index',compact('newsLetters','newsLetterCount'));
+        $coupons= DB::table('cobons')->select('id','name','percentage')->orderBy('id','desc')->paginate('5');
+        $couponsCount =DB::table('cobons')->select('id')->get();
+        return view('dashboard.cobon.index',compact('coupons','couponsCount'));
     }
-
+    public function create(){
+        $category = Category::paginate(1);
+        return response()->json($category);
+    }
     public function store(Request $request){
-        $validator = Validator::make($request->all(),$this->newsLettersValidate());
+        $validator = Validator::make($request->all(),$this->categoryValidate());
         if ($validator->fails()){
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }else{
-            NewsLetter::create([
-                'email' => $request->email,
+            Category::create([
+                'name_en' => $request->name_en,
+                'name_de' => $request->name_de,
             ]);
-            return redirect()->route('website')->withToastSuccess(__('dashboardLang.Successfully Subscription ').$request->email);
+            return redirect()->route('category.index')->withToastSuccess(__('dashboardLang.Successfully Added').$request->name_.app()->getLocale(). ' in Categories');
         }
     }
 
@@ -34,7 +36,7 @@ class NewsLetterController extends Controller
         return view('dashboard.category.edit',compact('category'));
     }
     public function update($id,Request $request){
-        $validator = Validator::make($request->all(),$this->newsLettersValidateUp($id));
+        $validator = Validator::make($request->all(),$this->categoryValidateUp($id));
         if ($validator->fails()){
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
@@ -51,17 +53,17 @@ class NewsLetterController extends Controller
             ;
     }
 
-    protected function newsLettersValidate(){
+    protected function categoryValidate(){
         return [
-            'email' => 'required|unique:news_letters,email',
+            'name_en' => 'required|unique:categories,name_en',
+            'name_de' => 'required|unique:categories,name_de'
         ];
     }
-
-    protected function newsLettersValidateUp($id){
+    protected function categoryValidateUp($id){
         return [
-            'email'=> 'required|max:100|unique:news_letters,email,'.$id,
+            'name_en' => 'required|unique:categories,name_en,'.$id,
+            'name_de' => 'required|unique:categories,name_de,'.$id
         ];
     }
-
 
 }
