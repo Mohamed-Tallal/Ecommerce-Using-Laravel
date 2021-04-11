@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MainCategorySeeder::class);
         $this->call(CobonSeeder::class);
         $this->call(NewsLettersSeeder::class);
+        $this->call(BrandSeeder::class);
     }
 }

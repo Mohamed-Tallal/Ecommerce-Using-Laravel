@@ -13,7 +13,7 @@
         <div>
             <h1>
                 <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
-                Categories Page
+              Main Categories Page
             </h1>
             <p>Main Categories of ecoWaza Website</p>
         </div>

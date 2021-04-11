@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 
 class portfolioController extends Controller
 {
+    use ImageTrait;
     public function index(){
         $user =  User::find(auth()->guard('web')->user()->id);
         $name = explode(" ", $user->name);
@@ -24,6 +26,10 @@ class portfolioController extends Controller
         //$user->image = $request->image;
         if ($request->password !=null){
             $user->password = $request->password;
+        }
+        if ($request->image){
+            $image = $this->SaveImage('uploads/admins',$request->image);
+            $user->image = $image;
         }
         $user->update();
         return redirect()->route('user.portfolio')->with('toast_success' , __('dashboardLang.You Update Profile Success'));

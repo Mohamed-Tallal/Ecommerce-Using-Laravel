@@ -49,11 +49,99 @@
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     @lang('dashboardLang.Add_New_Admin')
                 </button>
-        @else
+                @if(auth()->user()->hasPermission('users_create'))
+                    <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+                         data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">@lang('dashboardLang.Add_New_Admin')</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="cont-data"></div>
+                                    <form id="addAdmin" >
+                                    <!---
+                        method="post" action="{{route('admin.store')}}">
+                        @csrf
+                                        --->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>@lang('dashboardLang.First_Name')</label>
+                                                <input class="form-control" type="text" name="first_name" >
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>@lang('dashboardLang.Last_Name')</label>
+                                                <input class="form-control" type="text" name="last_name" >
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-4">
+                                                <label>@lang('dashboardLang.Email')</label>
+                                                <input class="form-control" type="email" name="email">
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-12 mb-4">
+                                                <label>@lang('dashboardLang.Photo') Photo</label>
+                                                <input class="form-control" type="file" name="image">
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-12 mb-4">
+                                                <label>@lang('dashboardLang.Password')</label>
+                                                <input class="form-control" type="password" name="password">
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-12 mb-4">
+                                                <label>@lang('dashboardLang.Confirm_Password')</label>
+                                                <input class="form-control" type="password" name="password_confirmation">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <label>@lang('dashboardLang.Permissions')</label>
+
+                                            <div class="bs-component">
+                                                <ul class="nav nav-tabs">
+                                                    @foreach($models as $index=>$model)
+                                                        <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
+                                                    @endforeach
+                                                </ul>
+                                                <div class="tab-content mt-3 ml-2" id="myTabContent">
+                                                    @foreach($models as $index=>$model)
+                                                        <div class="tab-pane fade {{$index == 0? 'active show' : ''}} " id="{{$model.'_'.$index}}">
+                                                            @foreach($operatios as $index=>$ope)
+                                                                <div class="animated-checkbox">
+                                                                    <label>
+                                                                        <input type="checkbox" name="permission[]" value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang("dashboardLang.Close")</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>@lang("dashboardLang.Save")</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+
+            @else
             <button type="button" disabled class="btn btn-info">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
                 @lang('dashboardLang.Add_New_Admin')
             </button>
+
         @endif
         </div>
     </div>
@@ -153,86 +241,44 @@
             <h4 style="text-align: center;">@lang('dashboardLang.Not_Yield_Record_Yet') </h4>
         @endif
     </div>
-@if(auth()->user()->hasPermission('users_create'))
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static"
-         data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">@lang('dashboardLang.Add_New_Admin')</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{{route('admin.store')}}">
-                        @csrf
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>@lang('dashboardLang.First_Name')</label>
-                                    <input class="form-control" type="text" name="first_name" >
-                                </div>
-                                <div class="col-md-6">
-                                    <label>@lang('dashboardLang.Last_Name')</label>
-                                    <input class="form-control" type="text" name="last_name" >
-                                </div>
-                            </div>
-                        <div class="row">
-                            <div class="col-md-12 mb-4">
-                                <label>@lang('dashboardLang.Email')</label>
-                                <input class="form-control" type="email" name="email">
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-12 mb-4">
-                                <label>@lang('dashboardLang.Photo') Photo</label>
-                                <input class="form-control" type="file" name="image">
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-12 mb-4">
-                                <label>@lang('dashboardLang.Password')</label>
-                                <input class="form-control" type="password" name="password">
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-12 mb-4">
-                                <label>@lang('dashboardLang.Confirm_Password')</label>
-                                <input class="form-control" type="password" name="password_confirmation">
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label>@lang('dashboardLang.Permissions')</label>
 
-                            <div class="bs-component">
-                                <ul class="nav nav-tabs">
-                                    @foreach($models as $index=>$model)
-                                    <li class="nav-item"><a class="nav-link {{$index == 0? 'active' : ''}}" data-toggle="tab" href="{{'#'.$model.'_'.$index}}">@lang("dashboardLang.$model")</a></li>
-                                    @endforeach
-                                </ul>
-                                <div class="tab-content mt-3 ml-2" id="myTabContent">
-                                    @foreach($models as $index=>$model)
-                                    <div class="tab-pane fade {{$index == 0? 'active show' : ''}} " id="{{$model.'_'.$index}}">
-                                        @foreach($operatios as $index=>$ope)
-                                            <div class="animated-checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="permission[]" value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+@stop
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers:
+                {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+        });
+        $('#addAdmin').submit(function (e){
+            e.preventDefault();
+            var formData  = new FormData(jQuery('#addAdmin')[0]);
+            // console.log(formData);
+            $.ajax({
+                url:"{{route('admin.store')}}",
+                type:"POST",
+                data:formData,
+                contentType: false,
+                processData: false,
+                success:function(dataBack)
+                {
+                    $("#error").html("<li class='alert alert-success text-center p-1'> Added Success </li>");
+                    $(".cont-data").prepend(dataBack)
+                    $('.close').click()
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang("dashboardLang.Close")</button>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>@lang("dashboardLang.Save")</button>
-                        </div>
-                    </form>
-                </div>
+                }, error: function (xhr, status, error)
+                {
+                    $.each(xhr.responseJSON.errors,function(key,item)
+                    {
 
-            </div>
-        </div>
-    </div>
-@endif
+                        $("#error").html("<li class='alert alert-danger text-center p-1'>"+ item +" </li>");
+                    })
+                }
+            })
+
+        });
+
+    </script>
 
 @stop

@@ -43,7 +43,7 @@
         @else
             <button type="button" disabled class="btn btn-info">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
-                Add New Category
+                Add New Brand
             </button>
         @endif
         </div>
@@ -78,11 +78,11 @@
                                             <tr role="row" class="odd">
                                                 <td>{{++$index}}</td>
                                                 <td>{{$brand->name}}</td>
-                                                <td>{{$brand->logo}}</td>
+                                                <td ><img class="w-25" src="{{asset('uploads/brands/'.$brand->logo)}}"> </td>
                                                 <td class="d-flex">
                                                     @if(auth()->user()->hasPermission('categories_update'))
 
-                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('category.edit',$brand->id)}}" style="color: #fff" type="button">
+                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('brand.edit',$brand->id)}}" style="color: #fff" type="button">
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update
                                                         </a>
                                                     @else
@@ -90,7 +90,7 @@
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>Update</button>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('categories_delete'))
-                                                        <form method="post" action="{{route('category.destroy',$brand->id)}}">
+                                                        <form method="post" action="{{route('brand.destroy',$brand->id)}}">
                                                         @csrf
                                                             {{method_field('delete')}}
                                                             <button class="btn btn-danger d-flex" type="submit">
@@ -114,7 +114,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$brands->count()}} of {{$brandCount->count()}}  entries</div>
+                                    <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">Showing 1 to {{$brands->count()}} of {{$brandsCount->count()}}  entries</div>
                                 </div>
                                 <div class="col-sm-12 col-md-7" >
                                     {{$brands->links('paginate')}}
@@ -143,16 +143,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{route('category.store')}}">
+                    <form method="post" action="{{route('brand.store')}}" enctype="multipart/form-data">
                         @csrf
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label>English Name</label>
-                                    <input class="form-control" type="text" name="name_en" >
+                                    <label>Brand Name</label>
+                                    <input class="form-control" type="text" name="name" >
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Germany Name</label>
-                                    <input class="form-control" type="text" name="name_de" >
+                                    <label>Logo</label>
+                                    <input class="form-control" type="file" name="logo" >
                                 </div>
                             </div>
                         <div class="modal-footer">

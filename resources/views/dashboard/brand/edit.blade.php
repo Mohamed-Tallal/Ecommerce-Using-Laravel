@@ -36,17 +36,17 @@
                     Show Categories</a>
             </div>
             </div>
-        <form method="post" class="mt-3" action="{{route('category.update',$category->id)}}">
+        <form method="post" class="mt-3" action="{{route('brand.update',$brand->id)}}" enctype="multipart/form-data">
             @csrf
             {{method_field('PATCH')}}
             <div class="row">
                 <div class="col-md-12">
-                    <label>English Name</label>
-                    <input class="form-control" type="text" name="name_en" value="{{$category->name_en}}">
+                    <label>Brand Name</label>
+                    <input class="form-control" type="text" name="name" value="{{$brand->name}}">
                 </div>
                 <div class="col-md-12">
-                    <label>Germany Name</label>
-                    <input class="form-control" type="text" name="name_de" value="{{$category->name_de}}" >
+                    <label>Brand Logo</label>
+                    <input class="form-control" type="file" name="logo"  >
                 </div>
             </div>
 

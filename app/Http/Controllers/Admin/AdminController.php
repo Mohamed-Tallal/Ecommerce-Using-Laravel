@@ -25,11 +25,12 @@ class AdminController extends Controller
         $admin = User::create([
            'name' => $request->first_name .' '. $request->last_name,
             'email' => $request->email,
+            'image' => $request->image,
             'password' => bcrypt($request->password),
         ]);
         $admin->attachRole('admins');
         $admin->syncPermissions($request->permission);
-        return redirect()->route('admin.index')->with('toast_success' ,__('dashboardLang.Successfully Added'). $admin->name_.app()->getLocal());
+        return redirect()->route('admin.index')->with('toast_success' ,__('dashboardLang.Successfully Added'). $admin->name);
     }
 
 

@@ -68,7 +68,7 @@
                     <div class="tab-pane fade" id="user-settings">
                         <div class="tile user-settings">
                             <h4 class="line-head">@lang("dashboardLang.Settings")</h4>
-                            <form method="post" action="{{route('user.post.portfolio')}}">
+                            <form method="post" action="{{route('user.post.portfolio')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-4">
                                     <div class="col-md-5">
