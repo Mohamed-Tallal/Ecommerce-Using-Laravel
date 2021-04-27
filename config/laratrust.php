@@ -10,6 +10,7 @@ return [
     | are going to be used are the ones inside the 'user_models' array.
     |
     */
+
     'use_morph_map' => false,
 
     /*
@@ -25,6 +26,7 @@ return [
     |           This method doesn't support cache yet.
     |
      */
+
     'checker' => 'default',
 
     /*
@@ -46,6 +48,7 @@ return [
         | NOTE: Currently the database check does not use cache.
         |
         */
+
         'enabled' => env('LARATRUST_ENABLE_CACHE', true),
 
         /*
@@ -56,6 +59,7 @@ return [
         | Determines the time in SECONDS to store Laratrust's roles and permissions in the cache.
         |
         */
+
         'expiration_time' => 3600,
     ],
 
@@ -86,6 +90,7 @@ return [
     | to have a different name, you can do it here.
     |
     */
+
     'models' => [
 
         'role' => \App\Models\Role::class,
@@ -98,6 +103,7 @@ return [
         'team' => \App\Models\Team::class,
     ],
 
+
     /*
     |--------------------------------------------------------------------------
     | Laratrust Tables
@@ -106,6 +112,8 @@ return [
     | These are the tables used by Laratrust to store all the authorization data.
     |
     */
+
+
     'tables' => [
 
         'roles' => 'roles',
@@ -124,6 +132,8 @@ return [
         'permission_role' => 'permission_role',
     ],
 
+
+
     /*
     |--------------------------------------------------------------------------
     | Laratrust Foreign Keys
@@ -132,6 +142,8 @@ return [
     | These are the foreign keys used by laratrust in the intermediate tables.
     |
     */
+
+
     'foreign_keys' => [
         /**
          * User foreign key on Laratrust's role_user and permission_user tables.
@@ -162,6 +174,8 @@ return [
     | This configuration helps to customize the Laratrust middleware behavior.
     |
     */
+
+
     'middleware' => [
         /**
          * Define if the laratrust middleware are registered automatically in the service provider
@@ -204,6 +218,7 @@ return [
     ],
 
     'teams' => [
+
         /*
         |--------------------------------------------------------------------------
         | Use teams feature in the package
@@ -213,6 +228,7 @@ return [
         | Please check the docs to see what you need to do in case you have the package already configured.
         |
         */
+
         'enabled' => false,
 
         /*
@@ -238,7 +254,10 @@ return [
     | Available: camel_case|snake_case|kebab_case
     |
     */
+
+
     'magic_is_able_to_method_case' => 'kebab_case',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -248,6 +267,8 @@ return [
     | Determines if you can check if a user has a permission using the "can" method.
     |
     */
+
+
     'permissions_as_gates' => false,
 
     /*
@@ -258,6 +279,8 @@ return [
     | Section to manage everything related with the admin panel for the roles and permissions.
     |
     */
+
+
     'panel' => [
         /*
         |--------------------------------------------------------------------------

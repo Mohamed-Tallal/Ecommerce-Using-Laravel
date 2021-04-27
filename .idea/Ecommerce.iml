@@ -117,5 +117,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Saahs" />
+    <orderEntry type="module" module-name="Saahs" />
+    <orderEntry type="module" module-name="PointOS" />
   </component>
 </module>

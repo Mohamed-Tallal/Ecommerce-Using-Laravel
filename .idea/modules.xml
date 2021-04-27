@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Ecommerce.iml" filepath="$PROJECT_DIR$/.idea/Ecommerce.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../POS/PointOS/.idea/PointOS.iml" filepath="$PROJECT_DIR$/../../POS/PointOS/.idea/PointOS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Yisweb/New folder/Saahs/.idea/Saahs.iml" filepath="$PROJECT_DIR$/../../Yisweb/New folder/Saahs/.idea/Saahs.iml" />
     </modules>
   </component>
 </project>

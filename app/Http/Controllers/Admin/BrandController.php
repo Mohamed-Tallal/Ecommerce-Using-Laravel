@@ -7,6 +7,7 @@ use App\Models\BradCategory;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
@@ -24,10 +25,10 @@ class BrandController extends Controller
         if ($validator->fails()){
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }else{
-            if ($request->logo){
+            if ( $request->logo && $request->logo != null){
                 $image = $this->SaveImage('uploads/brands',$request->logo);
             }
-            BradCategory::create([
+            DB::table('brad_categories')->insert([
                 'name' => $request->name,
                 'logo' => $image,
             ]);
@@ -47,8 +48,9 @@ class BrandController extends Controller
         }
         $brand = BradCategory::find($id);
         $brand->name = $request->name;
-        if ($request->logo){
+        if ( $request->logo && $request->logo != null){
             $image = $this->SaveImage('uploads/brands',$request->logo);
+            Storage::disk('public_image')->delete('/brands/'.$brand->logo);
             $brand->logo = $image;
         }
         $brand->update();
@@ -57,11 +59,14 @@ class BrandController extends Controller
 
 
     public function destroy($id){
-        BradCategory::find($id)->delete();
+       $brand = BradCategory::find($id);
+       Storage::disk('public_image')->delete('/brands/'.$brand->logo);
+       $brand->delete();
         return back()->withToastSuccess(
             __('dashboardLang.Successfully deleted'))
             ;
     }
+
 
     protected function categoryValidate(){
         return [
@@ -69,6 +74,8 @@ class BrandController extends Controller
             'logo' => 'required|mimes:jpeg,jpg,png|max:10000'
         ];
     }
+
+
     protected function categoryValidateUp($id){
         return [
             'name' => 'required|unique:brad_categories,name,'.$id,

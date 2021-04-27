@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use  RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +12,13 @@ use  RealRashid\SweetAlert\Facades\Alert;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get('/', function () {
     return view('website.layouts.app');
 })->name('website');
+
+
 Route::post('subscription','Website\HomeController@subscription')->name('subscription.store');
     Route::group([
             'prefix' => LaravelLocalization::setLocale(),
@@ -38,15 +41,27 @@ Route::post('subscription','Website\HomeController@subscription')->name('subscri
                 Route::get('/home', function () {
                     return view('dashboard.index');
                 })->name('dashboard.index');
+
                 Route::post('/postLogout','Auth\loginController@postLogout')->name('user.logout');
+
                 Route::get('portfolio','Auth\portfolioController@index')->name('user.portfolio');
+
                 Route::post('portfolio','Auth\portfolioController@portfolioUpdate')->name('user.post.portfolio');
-                Route::resource('admin','AdminController')->except(['create','show']);
+
+                Route::resource('admin','AdminController')->except(['show']);
+
                 Route::resource('category','CategoryController')->except(['create','show']);
+
                 Route::resource('subcategory','SubCategoryController')->except(['create','show']);
+
                 Route::resource('brand','BrandController')->except(['create','show']);
+
                 Route::resource('newsletters','NewsLetterController')->except(['create','show']);
+
                 Route::resource('coupon','CouponController')->except(['create','show']);
+
+                Route::resource('product','ProductController');
+
             });
 
             ### End Dashboard Routes

@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CobonSeeder::class);
         $this->call(NewsLettersSeeder::class);
         $this->call(BrandSeeder::class);
+        $this->call(ColorSeeder::class);
+        $this->call(TagSeeder::class);
     }
 }

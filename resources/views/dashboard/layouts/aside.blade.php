@@ -23,11 +23,13 @@
         @if(auth()->user()->hasPermission('users_read'))
             <li>
                 <a class="app-menu__item {{is_Active('admin')}}" href="{{route('admin.index')}}">
-                    <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+                    <i class="app-menu__icon fa fa-user-secret" aria-hidden="true"></i>
                     <span class="app-menu__label">Admins</span>
                 </a>
             </li>
         @endif
+
+
         <li class="treeview">
             <a class="app-menu__item {{is_Active('category')}}" href="#" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Categories</span>
@@ -50,6 +52,9 @@
                 <li>
             </ul>
         </li>
+
+
+
         <li class="treeview">
             <a class="app-menu__item {{is_Active('brand')}}" href="{{route('brand.index')}}" data-toggle="treeview">
                 <i class="app-menu__icon fa fa-shopping-cart"></i>
@@ -58,15 +63,17 @@
             <ul class="treeview-menu">
 
                 <li>
-                    <a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener">
-                        <i class="icon fa fa-circle-o">
-                        </i> Font Icons</a></li>
+                    <a class="treeview-item" href="{{route('product.index')}}"><i class="icon fa fa-circle-o"></i> All Product </a>
                 <li>
-                    <a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a>
+                    <a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Best Seller </a>
                 </li>
                 <li>
-                    <a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a>
+                    <a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Slider </a>
                 </li>
+                <li>
+                    <a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Banner </a>
+                </li>
+
                 <li>
                     <a class="treeview-item {{is_Active('brand')}}" href="{{route('brand.index')}}">
                         <i class="app-menu__icon fa {{is_Active('brand') == 'active' ? 'fa-stop-circle-o' : 'fa-circle-o'}}"
@@ -79,6 +86,8 @@
             </ul>
         </li>
 
+
+
         <li>
             <a class="app-menu__item {{is_Active('newsletters')}}" href="{{route('newsletters.index')}}">
                 <i class="app-menu__icon fa fa-share-alt"></i>
@@ -86,13 +95,21 @@
             </a>
         </li>
 
+
+
         <li>
             <a class="app-menu__item {{is_Active('coupon')}}" href="{{route('coupon.index')}}">
                 <i class="app-menu__icon fa fa-ticket"></i>
                 <span class="app-menu__label">Coupons</span>
             </a>
         </li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label"> Clients </span><i class="treeview-indicator fa fa-angle-right"></i></a>
+
+
+
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview">
+                <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+                <span class="app-menu__label"> Clients </span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
                 <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>

@@ -49,42 +49,42 @@
             </div>
             </div>
 
-        <form method="post" class="mt-3" action="{{route('admin.update',$admin->id)}}" enctype="multipart/form-data">
+        <form class="mt-3" method="post" action="{{route('admin.store')}}" enctype="multipart/form-data">
             @csrf
-            {{method_field('PATCH')}}
             <div class="row">
                 <div class="col-md-6">
-                    <label>@lang("dashboardLang.First_Name")</label>
-                    <input class="form-control" type="text" name="first_name" value="{{$firstname}}">
+                    <label>@lang('dashboardLang.First_Name')</label>
+                    <input class="form-control" type="text" name="first_name" value="{{old('first_name')}}">
                 </div>
                 <div class="col-md-6">
-                    <label>@lang("dashboardLang.Last_Name")</label>
-                    <input class="form-control" type="text" name="last_name" value="{{$lastname}}" >
+                    <label>@lang('dashboardLang.Last_Name')</label>
+                    <input class="form-control" type="text" name="last_name" value="{{old('last_name')}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-4">
-                    <label>@lang("dashboardLang.Email")</label>
-                    <input class="form-control" type="email" name="email" value="{{$admin->email}}">
+                    <label>@lang('dashboardLang.Email')</label>
+                    <input class="form-control" type="email" name="email" value="{{old('email')}}">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mb-4">
-                    <label>@lang("dashboardLang.Photo") </label>
+                    <label>@lang('dashboardLang.Photo') Photo</label>
                     <input class="form-control" type="file" name="image">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mb-4">
-                    <label>@lang("dashboardLang.Password") </label>
+                    <label>@lang('dashboardLang.Password')</label>
                     <input class="form-control" type="password" name="password">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mb-4">
-                    <label>@lang("dashboardLang.Confirm_Password") </label>
+                    <label>@lang('dashboardLang.Confirm_Password')</label>
                     <input class="form-control" type="password" name="password_confirmation">
                 </div>
             </div>
             <div class="col-lg-12">
-                <label>@lang("dashboardLang.Permissions") </label>
+                <label>@lang('dashboardLang.Permissions')</label>
+
                 <div class="bs-component">
                     <ul class="nav nav-tabs">
                         @foreach($models as $index=>$model)
@@ -97,7 +97,7 @@
                                 @foreach($operatios as $index=>$ope)
                                     <div class="animated-checkbox">
                                         <label>
-                                            <input type="checkbox" name="permission[]" {{$admin->hasPermission($model.'_'.$ope)? 'checked' : '' }}  value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
+                                            <input type="checkbox" name="permission[]" value="{{$model}}_{{$ope}}"><span class="label-text">@lang("dashboardLang.$ope")</span>
                                         </label>
                                     </div>
                                 @endforeach
@@ -106,6 +106,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-lg fa-check-circle"></i>@lang("dashboardLang.Save")</button>
             </div>

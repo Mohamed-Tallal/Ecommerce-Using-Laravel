@@ -1329,7 +1329,7 @@
 
             <!-- Banner -->
             <div class="col-12">
-                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/images/banner/banner-3.jpg')}}" alt="Banner"></a></div>
+                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/banners/fashion-accesories-banner.jpg')}}" alt="Banner"></a></div>
             </div>
 
         </div>
@@ -2374,17 +2374,17 @@
 
             <!-- Banner -->
             <div class="col-md-4 col-12 mb-30">
-                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/images/banner/banner-4.jpg')}}" alt="Banner"></a></div>
+                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/banners/home-1-banner-2.jpg')}}" alt="Banner"></a></div>
             </div>
 
             <!-- Banner -->
             <div class="col-md-4 col-12 mb-30">
-                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/images/banner/banner-5.jpg')}}" alt="Banner"></a></div>
+                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/banners/Banners.jpg')}}" alt="Banner"></a></div>
             </div>
 
             <!-- Banner -->
             <div class="col-md-4 col-12 mb-30">
-                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/images/banner/banner-6.jpg')}}" alt="Banner"></a></div>
+                <div class="banner"><a href="#"><img src="{{asset('wesite/assets/banners/home-1-banner-2.jpg')}}" alt="Banner"></a></div>
             </div>
 
         </div>

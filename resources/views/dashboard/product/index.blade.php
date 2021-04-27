@@ -8,12 +8,6 @@
 
 @stop
 @section('content')
-
-    @php
-        $models = ['users','categories','products'];
-        $operatios = ['read','create','update','delete'];
-    @endphp
-
     <div class="app-title">
         <div>
             <h1>
@@ -45,7 +39,7 @@
         <div class="col col-lg-4" style="margin-left: -80px">
 
         @if(auth()->user()->hasPermission('users_create'))
-                <a type="button" href="{{route('admin.create')}}" class="btn btn-info">
+                <a type="button" href="{{route('product.create')}}" class="btn btn-info">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     @lang('dashboardLang.Add_New_Admin')
                 </a>
@@ -67,7 +61,7 @@
                 </div>
             </div>
         </div>
-        @if($users->count() >0)
+        @if($products->count() >0)
         <div class="row">
             <div class="col-md-12">
                 <div class="tile-body">
@@ -86,16 +80,16 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $index=>$user)
+                                        @foreach($products as $index=>$product)
                                             <tr role="row" class="odd">
                                                 <td>{{++$index}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->email}}</td>
+                                                <td>{{$product->name}}</td>
+                                                <td>{{$product->email}}</td>
                                                 <td style="text-align: center">
                                                     <span class="badge badge-success">
                                                         {{
                                                     $firstname = ucfirst(implode("_", explode("_", implode(', ',
-                                                    $user->roles->pluck('name')->toArray()))))
+                                                    $product->roles->pluck('name')->toArray()))))
 
                                                     }}
                                                     </span>
@@ -103,7 +97,7 @@
                                                 <td class="d-flex">
                                                     @if(auth()->user()->hasPermission('users_update'))
 
-                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('admin.edit',$user->id)}}" style="color: #fff" type="button">
+                                                        <a class="btn btn-primary mr-2 d-flex" href="{{route('admin.edit',$product->id)}}" style="color: #fff" type="button">
                                                             <i class="fa fa-pencil iStyle" aria-hidden="true"></i>
                                                             @lang('dashboardLang.Update')
                                                         </a>
@@ -114,7 +108,7 @@
                                                         </button>
                                                     @endif
                                                     @if(auth()->user()->hasPermission('users_delete'))
-                                                        <form method="post" action="{{route('admin.destroy',$user->id)}}">
+                                                        <form method="post" action="{{route('admin.destroy',$product->id)}}">
                                                         @csrf
                                                             {{method_field('delete')}}
                                                             <button class="btn btn-danger d-flex" type="submit">
@@ -139,10 +133,10 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-5" >
                                     <div style="margin-top: -6px" class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">
-                                        @lang('dashboardLang.Showing_1_to'){{$users->count()}} @lang('dashboardLang.of')  {{$userCount}} @lang('dashboardLang.entries') </div>
+                                        @lang('dashboardLang.Showing_1_to'){{$products->count()}} @lang('dashboardLang.of')  {{$productCount}} @lang('dashboardLang.entries') </div>
                                 </div>
                                 <div class="col-sm-12 col-md-7" >
-                                    {{$users->links('paginate')}}
+                                    {{$products->links('paginate')}}
                                 </div>
                             </div>
 
